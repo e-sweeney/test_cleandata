@@ -1,4 +1,5 @@
 import pandas as pd
+from src.preprocess import preprocess_data
 
 def clean_data(df):
     df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
@@ -22,4 +23,11 @@ if __name__ == "__main__":
     df = pd.read_csv("raw_data.csv")
     clean_data(df).to_csv("cleaned_data.csv", index=False)
     print("Data cleaned and saved to 'cleaned_data.csv'")
+     
+
+    cleaned = clean_data(df)
+    preprocessed, encoders, scaler = preprocess_data(cleaned)
+  
+
+    print(preprocessed.head())
 
