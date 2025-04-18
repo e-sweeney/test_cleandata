@@ -3,11 +3,12 @@ import pandas as pd
 def clean_data(df):
     df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
 
-    df = df.drop_duplicates()
+    
 
     for col in df.select_dtypes(include='object').columns:
         df[col] = df[col].str.strip()
 
+    df = df.drop_duplicates()
     df['age'] = pd.to_numeric(df['age'], errors='coerce')
     df.fillna({
         'name': 'Unknown',
